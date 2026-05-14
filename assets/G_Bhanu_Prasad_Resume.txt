@@ -1,0 +1,8 @@
+G Bhanu Prasad
+Full Stack Developer
+Email: gundabathinabhanuprasad@gmail.com
+LinkedIn: https://www.linkedin.com/in/bhanuprasad-gundabathina-509a74340/
+GitHub: https://github.com/gundabathinabhanuprasad
+
+This is a placeholder resume file. 
+Please replace this file in your assets directory with your actual PDF resume (and update the extension in index.html to .pdf if necessary).
