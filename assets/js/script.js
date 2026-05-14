@@ -98,6 +98,19 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // Close mobile menu when a link is clicked
+    navItems.forEach(item => {
+        item.addEventListener('click', () => {
+            if (navLinks.classList.contains('active')) {
+                navLinks.classList.remove('active');
+                const bars = document.querySelectorAll('.bar');
+                bars[0].classList.remove('rotate-45');
+                bars[1].classList.remove('opacity-0');
+                bars[2].classList.remove('rotate-neg-45');
+            }
+        });
+    });
+
     // Contact Form Submission
     const contactForm = document.querySelector('.contact-form');
     if (contactForm) {
