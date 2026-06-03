@@ -17,6 +17,8 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    overflow-wrap: break-word;
+    word-break: break-word;
 }
 
 html {
@@ -68,7 +70,7 @@ img {
 .container {
     max-width: 1300px;
     margin: 0 auto;
-    padding: 0 2rem;
+    padding: 0 clamp(1.2rem, 4vw, 2rem);
 }
 
 .grid {
@@ -77,7 +79,7 @@ img {
 }
 
 section {
-    padding: 100px 0;
+    padding: clamp(60px, 8vw, 100px) 0;
 }
 
 
@@ -226,6 +228,23 @@ section {
 
 @keyframes blink {
     50% { border-color: transparent; }
+}
+
+.hero-skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin-bottom: 2rem;
+}
+
+.hero-skills span {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    background: rgba(255, 122, 0, 0.1);
+    padding: 0.4rem 1rem;
+    border-radius: 50px;
+    border: 1px solid rgba(255, 122, 0, 0.2);
 }
 
 .hero-btns {
@@ -406,7 +425,7 @@ section {
 .experience-card {
     background: var(--bg-card);
     border-radius: 24px;
-    padding: 3rem;
+    padding: clamp(1.5rem, 5vw, 3rem);
     border: 1px solid var(--glass-border);
     transition: var(--transition);
 }
@@ -475,7 +494,7 @@ section {
 
 .skill-category {
     background: var(--bg-card);
-    padding: 2.5rem;
+    padding: clamp(1.5rem, 5vw, 2.5rem);
     border-radius: 24px;
     border: 1px solid var(--glass-border);
 }
@@ -576,7 +595,7 @@ section {
 }
 
 .project-content {
-    padding: 2rem;
+    padding: clamp(1.2rem, 4vw, 2rem);
 }
 
 .project-tags {
@@ -603,7 +622,7 @@ section {
 /* --- Contact --- */
 .contact-card {
     background: var(--bg-card);
-    padding: 4rem;
+    padding: clamp(1.5rem, 5vw, 4rem);
     border-radius: 32px;
     border: 1px solid var(--glass-border);
     backdrop-filter: blur(20px);
@@ -733,8 +752,11 @@ footer p {
 
 @media (max-width: 992px) {
     .hero .grid, .about-grid, .contact-content { grid-template-columns: 1fr; gap: 3rem; }
-    .hero-image { order: -1; margin-bottom: 2rem; }
-    .contact-card { padding: 2.5rem; }
+    .hero-image { order: -1; margin-bottom: 1rem; }
+    .hero-content { display: flex; flex-direction: column; align-items: center; text-align: center; }
+    .hero-skills { justify-content: center; }
+    .image-wrapper { max-width: clamp(140px, 35vw, 250px); aspect-ratio: 1/1; border-radius: 50%; }
+    .image-wrapper img { border-radius: 50%; }
 }
 
 @media (max-width: 768px) {
@@ -744,15 +766,20 @@ footer p {
         left: -100%;
         width: 100%;
         height: calc(100vh - var(--nav-height));
-        background: var(--bg-dark);
+        background: rgba(18, 18, 18, 0.98);
+        backdrop-filter: blur(20px);
         flex-direction: column;
         align-items: center;
-        padding-top: 3rem;
+        padding-top: 2rem;
         transition: 0.5s;
+        z-index: 999;
     }
 
     .nav-links.active { left: 0; }
-    .menu-toggle { display: flex; }
+    .nav-links li { width: 100%; text-align: center; }
+    .nav-links a { display: block; padding: 1.5rem; font-size: 1.2rem; }
+    
+    .menu-toggle { display: flex; z-index: 1005; }
     .nav-btns .btn-primary { display: none; }
     
     footer .container { flex-direction: column; gap: 1.5rem; }
@@ -760,14 +787,10 @@ footer p {
     .hero-btns { flex-direction: column; width: 100%; gap: 1rem; }
     .hero-btns a { width: 100%; justify-content: center; }
     
-    .contact-card { padding: 1.5rem; }
-    
     .projects-grid {
         grid-template-columns: 1fr;
         gap: 3rem;
     }
-    
-    section { padding: 60px 0; }
 }
 
 @media (max-width: 480px) {
