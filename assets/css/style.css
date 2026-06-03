@@ -354,6 +354,28 @@ section {
     margin-bottom: 0.5rem;
 }
 
+.stat-card.current-role {
+    transition: var(--transition);
+}
+
+.stat-card.current-role:hover {
+    transform: scale(1.03);
+    border-color: var(--primary-color);
+    box-shadow: 0 0 15px var(--primary-glow);
+}
+
+.stat-card.current-role h3 {
+    font-size: 1.6rem;
+    font-weight: 700;
+}
+
+.stat-card.current-role i {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    margin-bottom: 0.8rem;
+    display: inline-block;
+}
+
 .about-features {
     display: flex;
     flex-direction: column;
