@@ -877,7 +877,7 @@ footer p {
     }
 
     .hero-bg-video-container video {
-        object-position: center top;
+        object-position: right top;
     }
 
     .stats-counter-bar {
@@ -926,7 +926,7 @@ footer p {
         display: none;
     }
 
-    /* Force background video to display clearly on mobile devices */
+    /* Force background video to align Bhanu (on the right side of 16:9 video) directly into mobile viewport */
     .hero-bg-video-container {
         position: absolute !important;
         top: 0 !important;
@@ -943,11 +943,15 @@ footer p {
         width: 100% !important;
         height: 100% !important;
         object-fit: cover !important;
-        object-position: center top !important;
+        object-position: 85% top !important; /* Positions Bhanu directly in mobile screen view */
         filter: brightness(0.8) contrast(1.1) !important;
         display: block !important;
         visibility: visible !important;
         opacity: 1 !important;
+    }
+
+    .video-dark-overlay {
+        background: linear-gradient(180deg, rgba(8, 10, 15, 0.7) 0%, rgba(8, 10, 15, 0.4) 50%, rgba(8, 10, 15, 0.95) 100%) !important;
     }
 
     /* Position control badges nicely without overlapping header title */
