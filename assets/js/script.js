@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // --- Hero Video Player Controls (Unmuted Audio by Default, Single Play, Pause on End) ---
+    // --- Hero Video Player Controls ---
     const heroVideo = document.getElementById('hero-video');
     const replayBtn = document.getElementById('replay-btn');
     const soundToggleBtn = document.getElementById('sound-toggle-btn');
@@ -18,20 +18,38 @@ document.addEventListener('DOMContentLoaded', () => {
     const soundText = document.getElementById('sound-text');
 
     if (heroVideo) {
-        // Set audio unmuted by default as requested
+        // Attempt unmuted play
         heroVideo.muted = false;
 
-        // Ensure video starts playing unmuted automatically (or handles browser policy)
         heroVideo.play().catch(error => {
-            console.log("Autoplay unmuted handled (browser user gesture requirement):", error);
-            // If browser blocks unmuted autoplay, mute temporarily until user click
+            console.log("Browser policy blocked initial unmuted autoplay:", error);
+            // Fallback: start muted so video plays visually, then unmute on first user interaction
             heroVideo.muted = true;
             if (soundIcon && soundText) {
                 soundIcon.className = 'fa-solid fa-volume-xmark';
-                soundText.textContent = 'Muted';
+                soundText.textContent = 'Click for Sound';
             }
             heroVideo.play();
         });
+
+        // Global First Interaction Listener to Unlock Unmuted Audio
+        const unlockUnmutedAudio = () => {
+            if (heroVideo) {
+                heroVideo.muted = false;
+                if (soundIcon && soundText) {
+                    soundIcon.className = 'fa-solid fa-volume-high';
+                    soundText.textContent = 'Sound On';
+                }
+                heroVideo.play().catch(() => {});
+            }
+            window.removeEventListener('click', unlockUnmutedAudio);
+            window.removeEventListener('keydown', unlockUnmutedAudio);
+            window.removeEventListener('touchstart', unlockUnmutedAudio);
+        };
+
+        window.addEventListener('click', unlockUnmutedAudio);
+        window.addEventListener('keydown', unlockUnmutedAudio);
+        window.addEventListener('touchstart', unlockUnmutedAudio);
 
         // Ensure video stays explicitly paused on the final frame when playback finishes (Single Play)
         heroVideo.addEventListener('ended', () => {
@@ -39,9 +57,10 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log("Video playback completed once. Video paused on final frame.");
         });
 
-        // Replay Button Click Handler - Restart video from beginning with unmuted audio
+        // Replay Button Click Handler - Restart video from beginning with sound
         if (replayBtn) {
-            replayBtn.addEventListener('click', () => {
+            replayBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
                 heroVideo.currentTime = 0;
                 heroVideo.muted = false;
                 if (soundIcon && soundText) {
@@ -54,7 +73,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Sound Mute / Unmute Toggle Handler
         if (soundToggleBtn) {
-            soundToggleBtn.addEventListener('click', () => {
+            soundToggleBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
                 heroVideo.muted = !heroVideo.muted;
 
                 if (heroVideo.muted) {
