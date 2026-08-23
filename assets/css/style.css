@@ -105,15 +105,6 @@ img, video {
     animation-delay: -5s;
 }
 
-.spotlight-3 {
-    top: 45%;
-    left: 35%;
-    width: 500px;
-    height: 500px;
-    background: #FBBF24;
-    animation-delay: -10s;
-}
-
 @keyframes spotlightPulse {
     0% { transform: translate(0, 0) scale(1); opacity: 0.15; }
     50% { transform: translate(30px, -40px) scale(1.1); opacity: 0.25; }
@@ -308,20 +299,56 @@ section {
     gap: 1rem;
 }
 
-/* --- Section 01 / HERO --- */
-.hero {
-    padding-top: calc(var(--nav-height) + 40px);
-    padding-bottom: 40px;
-    min-height: 92vh;
+/* --- Section 01 / HERO with Full Screen Background Video --- */
+.hero-fullscreen-video {
+    position: relative;
+    overflow: hidden;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    padding-top: calc(var(--nav-height) + 40px);
+    padding-bottom: 50px;
+}
+
+.hero-bg-video-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.hero-bg-video-container video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.65) contrast(1.15);
+}
+
+.video-dark-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 65% 45%, rgba(8, 10, 15, 0.4) 0%, rgba(8, 10, 15, 0.85) 75%, rgba(8, 10, 15, 0.98) 100%),
+                linear-gradient(180deg, rgba(8, 10, 15, 0.75) 0%, rgba(8, 10, 15, 0.45) 50%, rgba(8, 10, 15, 0.98) 100%);
+    pointer-events: none;
+}
+
+.hero-content-wrapper {
+    position: relative;
+    z-index: 2;
+    width: 100%;
 }
 
 .hero-grid {
     grid-template-columns: 1.2fr 0.8fr;
     align-items: center;
-    margin-bottom: 4rem;
+    margin-bottom: 3.5rem;
 }
 
 .hero-badge {
@@ -330,13 +357,14 @@ section {
     gap: 0.6rem;
     padding: 0.4rem 1.1rem;
     border-radius: 50px;
-    background: rgba(245, 158, 11, 0.08);
+    background: rgba(8, 10, 15, 0.75);
     border: 1px solid var(--glass-border-hover);
     color: var(--gold-bright);
     font-size: 0.8rem;
     font-weight: 700;
     letter-spacing: 1px;
     margin-bottom: 1.5rem;
+    backdrop-filter: blur(12px);
 }
 
 .status-dot {
@@ -360,6 +388,7 @@ section {
     letter-spacing: 1px;
     color: var(--text-main);
     margin-bottom: 1.2rem;
+    text-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
 }
 
 .hero-tags-row {
@@ -371,14 +400,16 @@ section {
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;
+    text-shadow: 0 4px 15px rgba(0,0,0,0.8);
 }
 
 .hero-description {
     font-size: clamp(1.05rem, 2.5vw, 1.2rem);
-    color: var(--text-muted);
+    color: var(--text-sub);
     line-height: 1.7;
     margin-bottom: 2.2rem;
     max-width: 620px;
+    text-shadow: 0 4px 15px rgba(0,0,0,0.8);
 }
 
 .hero-action-btns {
@@ -387,65 +418,55 @@ section {
     gap: 1.2rem;
 }
 
-/* --- Hero Avatar & Stage Spotlight --- */
-.hero-avatar-column {
+.hero-quote-side {
     display: flex;
-    justify-content: center;
-}
-
-.spotlight-stage {
-    position: relative;
-    width: 100%;
-    max-width: 420px;
-    display: flex;
-    flex-direction: column;
+    justify-content: flex-end;
     align-items: center;
 }
 
-.stage-glow {
-    position: absolute;
-    top: -10%;
-    left: -10%;
-    width: 120%;
-    height: 120%;
-    background: radial-gradient(circle, rgba(245, 158, 11, 0.25) 0%, transparent 70%);
-    z-index: 0;
-    filter: blur(40px);
-}
-
-.avatar-card {
-    position: relative;
-    width: 100%;
-    aspect-ratio: 9 / 12;
+.glass-gold-quote {
+    background: rgba(8, 10, 15, 0.75);
+    border: 1px solid var(--glass-border-hover);
+    padding: 2.5rem 2.2rem;
     border-radius: 28px;
-    overflow: hidden;
-    border: 2px solid var(--glass-border-hover);
-    box-shadow: 0 30px 70px -15px rgba(0, 0, 0, 0.8);
-    background: #000;
-    z-index: 1;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.8);
+    text-align: center;
+    max-width: 380px;
+    width: 100%;
 }
 
-.avatar-card video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+.quote-text {
+    font-family: var(--font-heading);
+    font-size: 1.35rem;
+    letter-spacing: 2px;
+    color: var(--gold-bright);
+    line-height: 1.3;
+}
+
+.quote-signature {
+    font-family: var(--font-script);
+    font-size: 2.4rem;
+    color: #FFFFFF;
+    margin-top: 0.2rem;
 }
 
 .sound-toggle-btn {
     position: absolute;
-    top: 15px;
-    right: 15px;
+    top: calc(var(--nav-height) + 20px);
+    right: 25px;
     z-index: 10;
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    padding: 0.5rem 1rem;
+    padding: 0.55rem 1.2rem;
     border-radius: 50px;
-    background: rgba(8, 10, 15, 0.8);
+    background: rgba(8, 10, 15, 0.85);
     border: 1px solid var(--glass-border-hover);
     backdrop-filter: blur(12px);
     color: #FFF;
-    font-size: 0.8rem;
+    font-size: 0.85rem;
     font-weight: 700;
     cursor: pointer;
     transition: var(--transition);
@@ -457,39 +478,17 @@ section {
     transform: scale(1.05);
 }
 
-.avatar-quote-box {
-    position: relative;
-    z-index: 2;
-    margin-top: 1.2rem;
-    text-align: center;
-}
-
-.quote-text {
-    font-family: var(--font-heading);
-    font-size: 1.15rem;
-    letter-spacing: 2px;
-    color: var(--gold-bright);
-    line-height: 1.3;
-}
-
-.quote-signature {
-    font-family: var(--font-script);
-    font-size: 2rem;
-    color: #FFFFFF;
-    margin-top: -0.2rem;
-}
-
 /* --- High-Aura Stats Counter Bar --- */
 .stats-counter-bar {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 1.5rem;
-    background: rgba(12, 15, 23, 0.85);
+    background: rgba(8, 10, 15, 0.85);
     border: 1px solid var(--glass-border-hover);
     padding: 2.2rem 1.8rem;
     border-radius: 24px;
     backdrop-filter: blur(20px);
-    box-shadow: 0 15px 40px -10px rgba(0, 0, 0, 0.6);
+    box-shadow: 0 15px 40px -10px rgba(0, 0, 0, 0.8);
 }
 
 .stat-counter-item {
@@ -917,7 +916,7 @@ footer p {
 @media (max-width: 1024px) {
     .hero-grid {
         grid-template-columns: 1fr;
-        gap: 3.5rem;
+        gap: 3rem;
         text-align: center;
     }
     
@@ -925,6 +924,10 @@ footer p {
         display: flex;
         flex-direction: column;
         align-items: center;
+    }
+
+    .hero-quote-side {
+        justify-content: center;
     }
 
     .hero-tags-row, .hero-action-btns {

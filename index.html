@@ -27,7 +27,6 @@
     <div class="aura-background">
         <div class="gold-spotlight spotlight-1"></div>
         <div class="gold-spotlight spotlight-2"></div>
-        <div class="gold-spotlight spotlight-3"></div>
     </div>
 
     <!-- Navigation -->
@@ -56,57 +55,57 @@
         </div>
     </nav>
 
-    <!-- Section 01 / HERO -->
-    <section id="home" class="hero">
-        <div class="container grid hero-grid">
-            <div class="hero-content">
-                <div class="hero-badge reveal-up">
-                    <span class="status-dot"></span> AVAILABLE FOR HIGH-IMPACT ROLES & PROJECTS
-                </div>
+    <!-- Section 01 / HERO with Full Screen Background Video -->
+    <section id="home" class="hero hero-fullscreen-video">
+        
+        <!-- Full-Screen Background Video Layer -->
+        <div class="hero-bg-video-container">
+            <video id="hero-video" autoplay loop muted playsinline poster="assets/images/bhanu.png">
+                <source src="assets/videos/intro.mp4" type="video/mp4">
+            </video>
+            <div class="video-dark-overlay"></div>
+            
+            <!-- Sound Mute/Unmute Badge -->
+            <button id="sound-toggle-btn" class="sound-toggle-btn">
+                <i class="fa-solid fa-volume-xmark" id="sound-icon"></i>
+                <span id="sound-text">Muted</span>
+            </button>
+        </div>
 
-                <h1 class="hero-aura-title reveal-up">
-                    I BUILD<br>
-                    <span class="gold-gradient-text">DIGITAL</span><br>
-                    EXPERIENCES.
-                </h1>
-                
-                <div class="hero-tags-row reveal-up">
-                    <span>FULL STACK DEVELOPER</span> • 
-                    <span>TECHOPS SPECIALIST</span> • 
-                    <span>AI & CLOUD ARCHITECT</span>
-                </div>
-
-                <p class="hero-description reveal-up">
-                    I turn bold ideas into seamless digital experiences. Where frontend meets powerful backend, and code transforms vision into impact.
-                </p>
-
-                <div class="hero-action-btns reveal-up">
-                    <a href="#projects" class="btn-gold-pill primary-gold">EXPLORE MY WORK <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
-                    <a href="assets/G_Bhanu_Prasad_Resume.txt" download="G_Bhanu_Prasad_Resume.txt" class="btn-gold-pill outline-gold">
-                        DOWNLOAD RESUME <i class="fa-solid fa-download"></i>
-                    </a>
-                </div>
-            </div>
-
-            <!-- Hero Avatar & Spotlight Column -->
-            <div class="hero-avatar-column reveal-up">
-                <div class="spotlight-stage">
-                    <div class="stage-glow"></div>
-                    <div class="avatar-card">
-                        <!-- Video or Cutout Avatar -->
-                        <video id="hero-video" autoplay loop muted playsinline poster="assets/images/bhanu.png">
-                            <source src="assets/videos/intro.mp4" type="video/mp4">
-                        </video>
-
-                        <!-- Sound Mute/Unmute Badge -->
-                        <button id="sound-toggle-btn" class="sound-toggle-btn">
-                            <i class="fa-solid fa-volume-xmark" id="sound-icon"></i>
-                            <span id="sound-text">Muted</span>
-                        </button>
+        <div class="container hero-content-wrapper">
+            <div class="grid hero-grid">
+                <div class="hero-content">
+                    <div class="hero-badge reveal-up">
+                        <span class="status-dot"></span> AVAILABLE FOR HIGH-IMPACT ROLES & PROJECTS
                     </div>
 
-                    <!-- Side Quote & Cursive Signature -->
-                    <div class="avatar-quote-box">
+                    <h1 class="hero-aura-title reveal-up">
+                        I BUILD<br>
+                        <span class="gold-gradient-text">DIGITAL</span><br>
+                        EXPERIENCES.
+                    </h1>
+                    
+                    <div class="hero-tags-row reveal-up">
+                        <span>FULL STACK DEVELOPER</span> • 
+                        <span>TECHOPS SPECIALIST</span> • 
+                        <span>AI & CLOUD ARCHITECT</span>
+                    </div>
+
+                    <p class="hero-description reveal-up">
+                        I turn bold ideas into seamless digital experiences. Where frontend meets powerful backend, and code transforms vision into impact.
+                    </p>
+
+                    <div class="hero-action-btns reveal-up">
+                        <a href="#projects" class="btn-gold-pill primary-gold">EXPLORE MY WORK <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                        <a href="assets/G_Bhanu_Prasad_Resume.txt" download="G_Bhanu_Prasad_Resume.txt" class="btn-gold-pill outline-gold">
+                            DOWNLOAD RESUME <i class="fa-solid fa-download"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Floating Quote & Cursive Signature Over Video -->
+                <div class="hero-quote-side reveal-up">
+                    <div class="avatar-quote-box glass-gold-quote">
                         <p class="quote-text">
                             "CODE IS MY CRAFT.<br>
                             IMPACT IS MY GOAL."
@@ -115,10 +114,8 @@
                     </div>
                 </div>
             </div>
-        </div>
 
-        <!-- High-Aura Stats Counter Bar -->
-        <div class="container">
+            <!-- High-Aura Stats Counter Bar -->
             <div class="stats-counter-bar reveal-up">
                 <div class="stat-counter-item">
                     <h3>1200+</h3>
