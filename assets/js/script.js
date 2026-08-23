@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // --- Hero Video Player Controls (Single Play, Pause on End, Replay & Mute) ---
+    // --- Hero Video Player Controls (Unmuted Audio by Default, Single Play, Pause on End) ---
     const heroVideo = document.getElementById('hero-video');
     const replayBtn = document.getElementById('replay-btn');
     const soundToggleBtn = document.getElementById('sound-toggle-btn');
@@ -18,21 +18,36 @@ document.addEventListener('DOMContentLoaded', () => {
     const soundText = document.getElementById('sound-text');
 
     if (heroVideo) {
-        // Ensure video starts playing once automatically
+        // Set audio unmuted by default as requested
+        heroVideo.muted = false;
+
+        // Ensure video starts playing unmuted automatically (or handles browser policy)
         heroVideo.play().catch(error => {
-            console.log("Autoplay policy handled by browser:", error);
+            console.log("Autoplay unmuted handled (browser user gesture requirement):", error);
+            // If browser blocks unmuted autoplay, mute temporarily until user click
+            heroVideo.muted = true;
+            if (soundIcon && soundText) {
+                soundIcon.className = 'fa-solid fa-volume-xmark';
+                soundText.textContent = 'Muted';
+            }
+            heroVideo.play();
         });
 
         // Ensure video stays explicitly paused on the final frame when playback finishes (Single Play)
         heroVideo.addEventListener('ended', () => {
             heroVideo.pause();
-            console.log("Video playback completed. Video paused on final frame.");
+            console.log("Video playback completed once. Video paused on final frame.");
         });
 
-        // Replay Button Click Handler - Restart video from beginning
+        // Replay Button Click Handler - Restart video from beginning with unmuted audio
         if (replayBtn) {
             replayBtn.addEventListener('click', () => {
                 heroVideo.currentTime = 0;
+                heroVideo.muted = false;
+                if (soundIcon && soundText) {
+                    soundIcon.className = 'fa-solid fa-volume-high';
+                    soundText.textContent = 'Sound On';
+                }
                 heroVideo.play();
             });
         }
