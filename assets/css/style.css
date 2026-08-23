@@ -319,6 +319,9 @@ section {
     height: 100%;
     z-index: 0;
     overflow: hidden;
+    display: block;
+    visibility: visible;
+    opacity: 1;
 }
 
 .hero-bg-video-container video {
@@ -326,7 +329,10 @@ section {
     height: 100%;
     object-fit: cover;
     object-position: right top;
-    filter: brightness(0.65) contrast(1.15);
+    filter: brightness(0.7) contrast(1.1);
+    display: block;
+    visibility: visible;
+    opacity: 1;
 }
 
 .video-dark-overlay {
@@ -857,7 +863,7 @@ footer p {
 .opacity-0 { opacity: 0; }
 .rotate-neg-45 { transform: rotate(-45deg) translate(5px, -6px); }
 
-/* --- Responsive Breakpoints (Cross-Platform Mobile Fixes) --- */
+/* --- Responsive Breakpoints (Cross-Platform Mobile Video Fixes) --- */
 @media (max-width: 1024px) {
     .hero-content {
         display: flex;
@@ -918,6 +924,30 @@ footer p {
 
     .nav-btns .btn-lets-talk {
         display: none;
+    }
+
+    /* Force background video to display clearly on mobile devices */
+    .hero-bg-video-container {
+        position: absolute !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+        z-index: 0 !important;
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
+
+    .hero-bg-video-container video {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important;
+        object-position: center top !important;
+        filter: brightness(0.8) contrast(1.1) !important;
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
     }
 
     /* Position control badges nicely without overlapping header title */

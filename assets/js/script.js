@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // --- Hero Video Player Controls ---
+    // --- Hero Video Player Controls (Mobile Cross-Platform Compatible) ---
     const heroVideo = document.getElementById('hero-video');
     const replayBtn = document.getElementById('replay-btn');
     const soundToggleBtn = document.getElementById('sound-toggle-btn');
@@ -18,21 +18,33 @@ document.addEventListener('DOMContentLoaded', () => {
     const soundText = document.getElementById('sound-text');
 
     if (heroVideo) {
-        // Attempt unmuted play
+        // Attempt unmuted play first
         heroVideo.muted = false;
 
-        heroVideo.play().catch(error => {
-            console.log("Browser policy blocked initial unmuted autoplay:", error);
-            // Fallback: start muted so video plays visually, then unmute on first user interaction
-            heroVideo.muted = true;
-            if (soundIcon && soundText) {
-                soundIcon.className = 'fa-solid fa-volume-xmark';
-                soundText.textContent = 'Click for Sound';
-            }
-            heroVideo.play();
-        });
+        const playPromise = heroVideo.play();
+        if (playPromise !== undefined) {
+            playPromise.catch(error => {
+                console.log("Browser unmuted autoplay restricted:", error);
+                // Fallback for mobile browser autoplay policy: start muted so video plays instantly
+                heroVideo.muted = true;
+                if (soundIcon && soundText) {
+                    soundIcon.className = 'fa-solid fa-volume-xmark';
+                    soundText.textContent = 'Click for Sound';
+                }
+                heroVideo.play().catch(e => console.log("Muted autoplay fallback error:", e));
+            });
+        }
 
-        // Global First Interaction Listener to Unlock Unmuted Audio
+        // Force play helper for mobile web browsers (iOS Safari & Android Chrome)
+        const triggerMobilePlay = () => {
+            if (heroVideo) {
+                if (heroVideo.paused) {
+                    heroVideo.play().catch(() => {});
+                }
+            }
+        };
+
+        // Global First Interaction Listener to Unlock Unmuted Audio on Mobile
         const unlockUnmutedAudio = () => {
             if (heroVideo) {
                 heroVideo.muted = false;
@@ -45,13 +57,16 @@ document.addEventListener('DOMContentLoaded', () => {
             window.removeEventListener('click', unlockUnmutedAudio);
             window.removeEventListener('keydown', unlockUnmutedAudio);
             window.removeEventListener('touchstart', unlockUnmutedAudio);
+            window.removeEventListener('scroll', unlockUnmutedAudio);
         };
 
         window.addEventListener('click', unlockUnmutedAudio);
         window.addEventListener('keydown', unlockUnmutedAudio);
         window.addEventListener('touchstart', unlockUnmutedAudio);
+        window.addEventListener('scroll', unlockUnmutedAudio);
+        window.addEventListener('load', triggerMobilePlay);
 
-        // Ensure video stays explicitly paused on the final frame when playback finishes (Single Play)
+        // Ensure video stays explicitly paused on final frame when playback finishes (Single Play)
         heroVideo.addEventListener('ended', () => {
             heroVideo.pause();
             console.log("Video playback completed once. Video paused on final frame.");
