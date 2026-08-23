@@ -416,11 +416,18 @@ section {
     gap: 1.2rem;
 }
 
-.sound-toggle-btn {
+/* --- Control Badges: Replay & Mute Side by Side --- */
+.video-controls-badge-group {
     position: absolute;
     top: calc(var(--nav-height) + 20px);
     right: 25px;
     z-index: 10;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.control-badge-btn {
     display: flex;
     align-items: center;
     gap: 0.5rem;
@@ -429,6 +436,7 @@ section {
     background: rgba(8, 10, 15, 0.85);
     border: 1px solid var(--glass-border-hover);
     backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     color: #FFF;
     font-size: 0.85rem;
     font-weight: 700;
@@ -436,10 +444,11 @@ section {
     transition: var(--transition);
 }
 
-.sound-toggle-btn:hover {
+.control-badge-btn:hover {
     background: var(--gold-btn-gradient);
     color: #080A0F;
     transform: scale(1.05);
+    box-shadow: 0 6px 20px var(--gold-glow);
 }
 
 /* --- High-Aura Stats Counter Bar --- */

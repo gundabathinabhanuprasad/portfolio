@@ -55,21 +55,28 @@
         </div>
     </nav>
 
-    <!-- Section 01 / HERO with Full Screen Background Video (Single Play, No Caption) -->
+    <!-- Section 01 / HERO with Full Screen Background Video (Single Play, Pause on End, Replay + Mute Controls) -->
     <section id="home" class="hero hero-fullscreen-video">
         
-        <!-- Full-Screen Background Video Layer (Single Play - No Loop) -->
+        <!-- Full-Screen Background Video Layer (Plays once, stays paused on completion) -->
         <div class="hero-bg-video-container">
             <video id="hero-video" autoplay playsinline poster="assets/images/bhanu.png">
                 <source src="assets/videos/intro.mp4" type="video/mp4">
             </video>
             <div class="video-dark-overlay"></div>
             
-            <!-- Sound Mute/Unmute Badge -->
-            <button id="sound-toggle-btn" class="sound-toggle-btn">
-                <i class="fa-solid fa-volume-xmark" id="sound-icon"></i>
-                <span id="sound-text">Muted</span>
-            </button>
+            <!-- Video Control Badges: Replay & Mute side-by-side -->
+            <div class="video-controls-badge-group">
+                <button id="replay-btn" class="control-badge-btn" title="Replay Video">
+                    <i class="fa-solid fa-rotate-right"></i>
+                    <span>Replay</span>
+                </button>
+
+                <button id="sound-toggle-btn" class="control-badge-btn" title="Toggle Mute / Unmute">
+                    <i class="fa-solid fa-volume-xmark" id="sound-icon"></i>
+                    <span id="sound-text">Muted</span>
+                </button>
+            </div>
         </div>
 
         <div class="container hero-content-wrapper">
